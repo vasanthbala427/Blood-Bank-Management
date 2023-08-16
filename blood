@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include<string.h>
+struct blood_donation
+{
+    char name[30];
+    char blood_group[5];
+    long mobile_no;
+    char addres[50];
+};
+void blood_availabilty(struct blood_donation b[],int n)
+{
+    int p;
+    char q[4];
+    printf("Enter the wanted blood group:");
+    scanf("%s",q);
+    for(int i=0;i<=n;i++)
+    {
+       if(strcasecmp(q,b[i].blood_group)==0)
+       {
+       printf("Blood available:\n");
+       printf("%s %s %ld %s\n",b[i].name,b[i].blood_group,b[i].mobile_no,b[i].addres);
+       }
+       else
+       ///printf(".....Sorry this Blood Group donar's not available now!.....\n");
+         p=n;
+    }
+    if(p==n)
+       printf(".....Sorry this Blood Group donar's not available now!.....\n");
+}
+
+void new_add(struct blood_donation b[],int *n)
+{
+    int p;
+    printf("how many people you add:");
+    scanf("%d",&p);
+    for(int i=4;i<p+4;i++){
+       printf("Enter Name:");
+       scanf("%s",b[i].name);
+       fflush(stdin);
+       printf("Enter blood group:");
+       scanf("%s",b[i].blood_group);
+       fflush(stdin);
+       printf("Enter Mobile No:");
+       scanf("%ld",&b[i].mobile_no);
+       printf("Enter Addres:");
+       scanf("%s",b[i].addres);
+       fflush(stdin);
+       *n=i;
+       printf("Entered details:\n");
+       printf("%s  ,%s  ,%ld  ,%s\n",b[i].name,b[i].blood_group,b[i].mobile_no,b[i].addres);
+    }
+}
+
+int main()
+{
+    int m,n=3;
+    struct blood_donation b[10]={{"mahesh","AB-",6374693126,"12.bazar street,darasuram",},
+    {"santhi Raja","A-",6374693121,"12.bazar street,trichy"},
+    {"balakrishnan","B-",6374693124,"12.bazar street,dindukal"},
+    {"Nantha Kumar","AB+",7374693126,"12.bazar street,kattur"}};
+    while(1)
+    {
+        printf("\n\t1.Blood availability,\n\t2.new donar additon,\n\t3.exit\n");
+        printf("\tEnter the option:");
+        fflush(stdin);
+        scanf("%d",&m);
+        switch(m)
+        {
+        case 1:
+            blood_availabilty(b,n);
+             break;
+        case 2:
+            new_add(b,&n);
+            break;
+        case 3:
+           printf("....Thank you....");
+           return 0;
+           break;
+        default:
+           printf("invalid input:");
+        }
+    }
+}
